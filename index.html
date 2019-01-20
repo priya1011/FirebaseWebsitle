@@ -1,0 +1,69 @@
+<html>
+<!-- HTML5 Speech Recognition API -->
+<script>
+  function startDictation() {
+
+    if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+      var recognition = new webkitSpeechRecognition();
+
+      recognition.continuous = false;
+      recognition.interimResults = false;
+        recognition.lang = "en-US";
+      recognition.start();
+
+      recognition.onresult = function(e) {
+        document.getElementById('transcript').value
+                                 = e.results[0][0].transcript;
+        recognition.stop();
+        document.getElementById('labnol').submit();
+      };
+
+      recognition.onerror = function(e) {
+        recognition.stop();
+      }
+
+    }
+  }
+</script>
+
+
+<head>
+  <title>Google Replica</title>
+<link rel="stylesheet" href="stylesheet.css"/> 
+</head>
+
+<body>
+
+  <div class="main">
+    <div class="gg">
+    
+     <div id="topLinks" class="links" vertical-align="center">
+    <!-- <div class="gmail_Link"> -->
+        <a href="https://mail.google.com/mail/?tab=wm">Gmail</a>
+         <a href="https://en.wikipedia.org/wiki/Google">About</a>
+         <button onclick="window.location.href='https://accounts.google.com/ServiceLogin?hl=en&amp;passive=true&amp;continue=https://www.google.co.in/'">Sign in</button>
+      </div>
+    
+    </div>
+  <center>
+  <div align="center" class="gimage">
+  <img src="https://cdn-images-1.medium.com/max/721/0*W_3koJ9hFcRFHr6l.jpg">
+</div>
+
+<form id="labnol" method="get" action="https://www.google.com/search">
+  <div class="speech">
+    <input type="text" name="q" id="transcript" placeholder="Type or Say Something"/>
+    <img onclick="startDictation()" src="https://i.imgur.com/cHidSVu.gif" />
+  </div>
+  <div class="buttons">
+   <input value="Google Search" aria-label="Google Search" name="btnK" type="submit">
+   <input value="I'm Feeling Lucky" aria-label="I'm Feeling Lucky" name="btnI" type="submit" jsaction="sf.lck">
+  </div>
+</form>
+</center>
+</div>
+
+</body>
+
+</html>
